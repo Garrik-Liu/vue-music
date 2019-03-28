@@ -7,9 +7,9 @@ import App from './App.vue'
 // 全局样式
 import 'common/style/index.scss';
 
-// Vuex 和 Router 实例
-import router from 'router';
-import store from 'store';
+// 自定义配置对象
+import routes from 'router';
+import storeConfig from 'store';
 
 // 第三方库
 import VueLazyLoad from 'vue-lazyload';
@@ -25,6 +25,10 @@ Vue.use(VueLazyLoad, {
     loading: require('common/images/loading.gif')
 })
 fastclick.attach(document.body);
+
+// 实例化 Vuex 和 Router
+const router = new Router({ routes });
+const store = new Vuex.Store(storeConfig);
 
 
 // 创建 Vue 根实例

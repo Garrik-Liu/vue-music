@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "better-scroll": "^1.15.1",
+    "jsonp": "^0.2.1",
     "vue": "^2.6.6",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0"

@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <Header
-      class="app-header"
+      class="app_header"
       :title="title"
     ></Header>
     <Tab
-      class="app-tab"
+      class="app_tab"
       :tabs="tabs"
     ></Tab>
     <keep-alive>
-      <router-view class="app-content"></router-view>
+      <router-view class="app_content"></router-view>
     </keep-alive>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
   height: 100vh;
 }
 
-.app-content {
+.app_content {
   flex: 1 1 auto;
   overflow: hidden;
 }
