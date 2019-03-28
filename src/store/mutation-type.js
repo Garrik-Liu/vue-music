@@ -1,0 +1,8 @@
+export const SET_PLAYLIST = 'SET_PLAYLIST';
+export const SET_PLAYING = 'SET_PLAYING';
+export const SET_PLAY_HISTORY = 'SET_PLAY_HISTORY';
+export const SET_PLAY_FULL = 'SET_PLAY_FULL';
+export const SET_PLAY_MODE = 'SET_PLAY_MODE';
+export const SET_PLAY_INDEX = 'SET_PLAY_INDEX';
+
+export const SET_SEARCH_HISTORY = 'SET_SEARCH_HISTORY';

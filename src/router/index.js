@@ -1,9 +1,10 @@
+import Router from 'vue-router'
 import Recommend from 'components/Recommend';
 import Singer from 'components/Singer';
 import Rank from 'components/Rank';
 import Search from 'components/Search';
 
-export default [{
+const routes = [{
         path: '/',
         redirect: '/recommend'
     },
@@ -36,3 +37,7 @@ export default [{
         redirect: '/'
     }
 ];
+
+export default new Router({
+    routes
+})
