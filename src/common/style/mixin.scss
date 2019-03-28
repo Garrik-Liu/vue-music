@@ -1,0 +1,6 @@
+// [文本]:文本溢出元素时省略溢出内容
+@mixin no-wrap() {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
