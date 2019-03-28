@@ -1,6 +1,13 @@
 <template>
   <div class="rank_root">
-    <ScrollView class="rank_toplist">
+    <Loading
+      v-show="loading"
+      class="loading"
+    ></Loading>
+    <ScrollView
+      class="rank_toplist"
+      :data="topList"
+    >
       <ul>
         <RankItem
           v-for="item in topList"
@@ -9,10 +16,6 @@
           :songList="item.songList"
         ></RankItem>
       </ul>
-      <!-- <Loading
-        v-show="!topList.length"
-        class="loading"
-      ></Loading> -->
     </ScrollView>
     <router-view></router-view>
   </div>
@@ -20,7 +23,7 @@
 <script>
 import RankItem from "./RankItem";
 import ScrollView from "components/base/ScrollView";
-//import Loading from "components/common/Loading";
+import Loading from "components/common/Loading";
 
 import { getTopList } from "api/rank";
 import { ERR_OK } from "api/config";
@@ -41,8 +44,8 @@ export default {
 
   components: {
     RankItem,
-    ScrollView
-    //Loading
+    ScrollView,
+    Loading
   },
 
   created() {
@@ -63,11 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.rank_toplist {
-  &.loading {
-    position: absolute;
-    top: 45%;
-    transform: translateY(-50%);
-  }
+.loading {
+  margin-top: 100px;
 }
 </style>
