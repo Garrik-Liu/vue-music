@@ -14,6 +14,7 @@
           :key="item.name"
           :picUrl="item.picUrl"
           :songList="item.songList"
+          @click.native="onRankItemClick(item)"
         ></RankItem>
       </ul>
     </ScrollView>
@@ -60,6 +61,10 @@ export default {
           this.topList = res.data.topList;
         }
       });
+    },
+
+    onRankItemClick(item) {
+      this.$router.push(`/rank/${item.id}`);
     }
   }
 };

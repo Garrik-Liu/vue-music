@@ -2,6 +2,7 @@ import Recommend from 'components/Recommend';
 import Singer from 'components/Singer';
 import Rank from 'components/Rank';
 import Search from 'components/Search';
+import MusicList from 'components/MusicList';
 
 export default [{
         path: '/',
@@ -23,6 +24,9 @@ export default [{
     {
         path: '/rank',
         component: Rank,
+        children: [
+            { path: ':id', component: MusicList }
+        ]
 
     },
     // 搜索页面
