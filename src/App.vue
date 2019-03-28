@@ -1,23 +1,32 @@
 <template>
   <div id="app">
     <Header :title="title"></Header>
+    <Tab :tabs="tabs"></Tab>
   </div>
 </template>
 
 <script>
 import Header from "components/common/Header";
+import Tab from "components/common/Tab";
 
 export default {
   name: "app",
 
   data() {
     return {
-      title: "Vue Music"
+      title: "Vue Music",
+      tabs: [
+        { url: "/recommend", title: "推荐" },
+        { url: "/singer", title: "歌手" },
+        { url: "/rank", title: "排行" },
+        { url: "/search", title: "搜索" }
+      ]
     };
   },
 
   components: {
-    Header
+    Header,
+    Tab
   }
 };
 </script>
