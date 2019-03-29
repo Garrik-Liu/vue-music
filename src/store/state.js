@@ -1,8 +1,9 @@
 import { PLAY_MODE } from 'common/js/config';
 
 const state = {
+    // ---- Player ----
     // 播放列表
-    playList: {},
+    playList: [],
     // 音乐播放状态
     playing: false,
     // 播放页面是否展开
@@ -13,6 +14,16 @@ const state = {
     playHistory: [],
     // 音乐播放模式
     palyMode: PLAY_MODE.sequence,
+
+    //  ---- MusicList ----
+    // 音乐列表 ID
+    musicListId: '',
+    // 音乐列表标题
+    musicListTitle: '',
+    // 音乐列表背景图
+    musicListBg: '',
+    // 音乐列表 
+    musicList: [],
 
     // 搜索历史
     searchHistory: []

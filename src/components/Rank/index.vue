@@ -22,6 +22,8 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
+
 import RankItem from "./RankItem";
 import ScrollView from "components/base/ScrollView";
 import Loading from "components/common/Loading";
@@ -64,8 +66,16 @@ export default {
     },
 
     onRankItemClick(item) {
+      console.log(item);
+      this.setMusicListInfo({
+        id: item.id,
+        title: item.topTitle,
+        bgImg: item.picUrl
+      });
       this.$router.push(`/rank/${item.id}`);
-    }
+    },
+
+    ...mapActions(["setMusicListInfo"])
   }
 };
 </script>

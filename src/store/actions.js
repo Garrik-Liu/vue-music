@@ -25,6 +25,12 @@ export const insertSongToList = function({ commit, state }, song) {
     commit(types.SET_PLAY_INDEX, filteredPlaylist.length - 1);
 }
 
+export const setMusicListInfo = function({ commit }, { id, title, bgImg }) {
+    commit(types.SET_MUSICLIST_ID, id);
+    commit(types.SET_MUSICLIST_BG, bgImg);
+    commit(types.SET_MUSICLIST_TITLE, title);
+}
+
 // 插入历史记录
 export const insertHistory = function({ commit, state }, history, index) {
     let searchHistory = state.searchHistory.concat();

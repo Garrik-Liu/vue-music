@@ -15,7 +15,7 @@ export function getTopList() {
 }
 
 // 获取指定排行榜歌单数据
-export function getRankSongList(topid) {
+export function getRankData(topid) {
     const url = URL.rankMusicList;
 
     const query = Object.assign({}, CommonParams, {

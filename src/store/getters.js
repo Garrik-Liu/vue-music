@@ -15,6 +15,16 @@ export const playSong = (state) => {
     return state.playlist[state.playIndex] || {};
 }
 
+export const musicList = (state) => { return state.musicList }
+
+export const musicListInfo = (state) => {
+    return {
+        id: state.musicListId,
+        bgImg: state.musicListBg,
+        title: state.musicListTitle
+    }
+}
+
 export const searchHistory = (state) => {
     return state.searchHistory
 }
