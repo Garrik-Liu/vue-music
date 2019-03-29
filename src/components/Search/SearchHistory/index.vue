@@ -1,17 +1,26 @@
 <template>
   <div class="search-list">
-    <ul>
+
+    <transition-group
+      name="list"
+      tag="ul"
+    >
       <li
         class="search-item"
-        v-for="item in searches"
+        v-for="(item, index) in searches"
         :key="item"
+        @click="onHistoryClick(item)"
       >
         <span class="text">{{ item }}</span>
-        <span class="icon">
+        <span
+          class="icon"
+          @click.stop="onDeleteClick(index)"
+        >
           <i class="icon-delete"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
+
   </div>
 </template>
 
@@ -25,7 +34,15 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    onHistoryClick(item) {
+      this.$emit("select", item);
+    },
+
+    onDeleteClick(index) {
+      this.$emit("delete", index);
+    }
+  }
 };
 </script>
 
@@ -37,14 +54,8 @@ export default {
     height: 40px;
     overflow: hidden;
 
-    &.list-enter-active,
-    &.list-leave-active {
-      transition: all 0.1s;
-    }
-
-    &.list-enter,
-    &.list-leave-to {
-      height: 0;
+    &:last-of-type {
+      padding-bottom: 100px;
     }
 
     .text {
@@ -63,6 +74,16 @@ export default {
         color: $color-text-d;
       }
     }
+  }
+
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 300ms;
+  }
+
+  .list-leave-to {
+    opacity: 0;
+    transform: translate3d(-100px, 0, 0);
   }
 }
 </style>

@@ -1,19 +1,22 @@
 <template>
   <div class="search">
     <div class="search-box-wrapper">
+      <!-- 搜索栏 -->
       <SearchBox
         @query-change="onQueryChange"
         :outer-query="outerQuery"
         @clear="outerQuery = ''"
       ></SearchBox>
     </div>
+
+    <!-- 搜索热点 & 搜索记录 -->
     <div
       ref="shortcutWrapper"
       class="shortcut-wrapper"
-      v-show="!query"
     >
       <ScrollView
         ref="shortcut"
+        :data="searchHistory"
         class="shortcut"
       >
         <div>
@@ -25,7 +28,7 @@
                 class="item"
                 v-for="item in hotKeys"
                 :key="item.n"
-                @click="setSearchQuery(item)"
+                @click="setSearchQuery(item.k)"
               >
                 <span>{{ item.k }}</span>
               </li>
@@ -38,11 +41,17 @@
                 <i class="icon-clear"></i>
               </span>
             </h1>
-            <SearchList :searches="searchHistory"></SearchList>
+            <SearchList
+              :searches="searchHistory"
+              @select="setSearchQuery"
+              @delete="onHistoryDelete"
+            ></SearchList>
           </div>
         </div>
       </ScrollView>
     </div>
+
+    <!-- 搜索推荐 -->
     <div
       class="search-result"
       v-show="query"
@@ -57,7 +66,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 import SearchBox from "./SearchBox";
 import SearchList from "./SearchHistory";
@@ -69,7 +78,6 @@ import { getSearch, getHotKey } from "api/search";
 import { ERR_OK } from "api/config";
 import { getSongDetail } from "api/song";
 import { createSong } from "common/js/song";
-import { setTimeout } from "timers";
 
 export default {
   data() {
@@ -114,8 +122,8 @@ export default {
       this.query = query;
     },
 
-    setSearchQuery(item) {
-      this.outerQuery = item.k;
+    setSearchQuery(query) {
+      this.outerQuery = query;
     },
 
     _getSearch(query, length = 20) {
@@ -152,6 +160,17 @@ export default {
         this.insertSongToList(song);
       });
     },
+
+    onHistoryDelete(index) {
+      let searchHistory = this.searchHistory.concat();
+      searchHistory.splice(index, 1);
+
+      this.setSearchHistory(searchHistory);
+    },
+
+    ...mapMutations({
+      setSearchHistory: "SET_SEARCH_HISTORY"
+    }),
 
     ...mapActions(["insertSongToList"])
   },
@@ -232,6 +251,7 @@ export default {
     width: 100%;
     top: 178px;
     bottom: 0;
+    background: $color-background;
   }
 }
 </style>

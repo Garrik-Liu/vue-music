@@ -18,8 +18,8 @@
           <p class="text">{{ item.name + ' - ' + item.singer }}</p>
         </div>
       </li>
-      <Loading v-show="!result.length"></Loading>
     </ul>
+    <Loading v-show="!result.length"></Loading>
     <div
       v-show="!result.length"
       class="no-result-wrapper"
