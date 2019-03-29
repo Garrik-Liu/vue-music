@@ -43,7 +43,9 @@ export default {
 
   watch: {
     topList() {
-      this.loading = false;
+      if (this.topList.length > 0) {
+        this.loading = false;
+      }
     }
   },
 

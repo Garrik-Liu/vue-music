@@ -3,7 +3,6 @@
     <MusicList
       :title="title"
       :bgImgUrl="bgImgUrl"
-      :rank="true"
     >
     </MusicList>
   </transition>
@@ -16,7 +15,7 @@ import MusicList from "components/common/MusicList";
 
 import { ERR_OK } from "api/config";
 import { createSong } from "common/js/song";
-import { getRankData } from "api/rank";
+import { getSingerDetail } from "api/singer";
 
 export default {
   data() {
@@ -33,7 +32,7 @@ export default {
   activated() {
     this.title = this.musicListInfo.title;
     this.bgImgUrl = this.musicListInfo.bgImg;
-    this._getRankData(this.musicListInfo.id);
+    this._getSingerDetail(this.musicListInfo.id);
   },
 
   beforeRouteLeave(to, from, next) {
@@ -42,16 +41,16 @@ export default {
   },
 
   methods: {
-    // 获取排行榜数据
-    _getRankData(id) {
+    // 获取歌手数据
+    _getSingerDetail(id) {
       // 如果没有 id 则回退
       if (!id) {
-        this.$router.push("/rank");
+        this.$router.push("/singer");
       }
 
-      getRankData(id).then(res => {
+      getSingerDetail(id).then(res => {
         if (res.code === ERR_OK) {
-          this.setMusicList(this.normalizeSongs(res.songlist));
+          this.setMusicList(this.normalizeSongs(res.data.list));
         }
       });
     },
@@ -60,7 +59,7 @@ export default {
     normalizeSongs(list) {
       let songList = [];
       list.forEach(item => {
-        let data = item.data;
+        let data = item.musicData;
         if (data.songid && data.albumid) {
           songList.push(createSong(data));
         }

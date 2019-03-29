@@ -3,6 +3,7 @@ import Singer from 'components/Singer';
 import Rank from 'components/Rank';
 import Search from 'components/Search';
 import RankMusicList from 'components/Rank/RankMusicList';
+import SingerMusicList from 'components/Singer/SingerMusicList';
 
 export default [{
         path: '/',
@@ -18,6 +19,9 @@ export default [{
     {
         path: '/singer',
         component: Singer,
+        children: [
+            { path: ':id', component: SingerMusicList }
+        ]
 
     },
     // 排行榜页面
