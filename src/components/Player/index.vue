@@ -58,6 +58,7 @@
             </div>
           </transition>
 
+          <!-- 全屏展示歌词 -->
           <transition name="middle-full">
             <ScrollView
               class="middle-r"

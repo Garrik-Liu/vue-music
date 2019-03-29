@@ -1,36 +1,37 @@
 <template>
-  <ScrollView
-    class="singer-list_scroll"
-    :probeType="probeType"
-    :data="data"
-    ref="singerList"
-    @scroll="onScroll"
-  >
+  <div class="singer-list_root">
     <Loading
       class="loading"
       v-show="loading"
     ></Loading>
-
-    <!-- 歌手列表 -->
-    <ul>
-      <li
-        class="singer-list_group"
-        v-for="group in data"
-        :key="group.title"
-        ref="group"
-      >
-        <!-- 依照姓氏拼音首字母排序列表 -->
-        <h2 class="singer-list_group_title">{{ group.title }}</h2>
-        <ul>
-          <SingerItem
-            v-for="item in group.items"
-            :key="item.avatar"
-            :data="item"
-            @click.native="$emit('select', item)"
-          ></SingerItem>
-        </ul>
-      </li>
-    </ul>
+    <ScrollView
+      class="singer-list_scroll"
+      :probeType="probeType"
+      :data="data"
+      ref="singerList"
+      @scroll="onScroll"
+    >
+      <!-- 歌手列表 -->
+      <ul>
+        <li
+          class="singer-list_group"
+          v-for="group in data"
+          :key="group.title"
+          ref="group"
+        >
+          <!-- 依照姓氏拼音首字母排序列表 -->
+          <h2 class="singer-list_group_title">{{ group.title }}</h2>
+          <ul>
+            <SingerItem
+              v-for="item in group.items"
+              :key="item.avatar"
+              :data="item"
+              @click.native="$emit('select', item)"
+            ></SingerItem>
+          </ul>
+        </li>
+      </ul>
+    </ScrollView>
 
     <!-- 滚动时显示当前所在字母位置 -->
     <div
@@ -47,7 +48,7 @@
       @touchstart="onLetterTouchStart"
       @touchmove="onLetterTouchMove"
     ></LetterBar>
-  </ScrollView>
+  </div>
 </template>
 
 <script>
@@ -185,13 +186,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.singer-list_scroll {
+.singer-list_root {
   position: relative;
-  background: $color-background;
+  height: 100%;
 
   .loading {
     margin-top: 100px;
   }
+}
+
+.singer-list_scroll {
+  background: $color-background;
 }
 
 .singer-list_group {
