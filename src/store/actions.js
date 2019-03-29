@@ -2,6 +2,7 @@ import * as types from './mutation-type'
 
 // 启动播放器
 export const initPlayer = function({ commit }, { songs, index }) {
+    console.log(songs, index)
     commit(types.SET_PLAYLIST, songs);
     commit(types.SET_PLAY_INDEX, index);
     commit(types.SET_PLAY_FULL, true);
@@ -25,6 +26,7 @@ export const insertSongToList = function({ commit, state }, song) {
     commit(types.SET_PLAY_INDEX, filteredPlaylist.length - 1);
 }
 
+// 设置音乐列表信息
 export const setMusicListInfo = function({ commit }, { id, title, bgImg }) {
     commit(types.SET_MUSICLIST_ID, id);
     commit(types.SET_MUSICLIST_BG, bgImg);

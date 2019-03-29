@@ -11,12 +11,14 @@
     <keep-alive>
       <router-view class="app_content"></router-view>
     </keep-alive>
+    <Player></Player>
   </div>
 </template>
 
 <script>
 import Header from "components/common/Header";
 import Tab from "components/common/Tab";
+import Player from "components/Player";
 
 export default {
   name: "app",
@@ -35,7 +37,8 @@ export default {
 
   components: {
     Header,
-    Tab
+    Tab,
+    Player
   }
 };
 </script>

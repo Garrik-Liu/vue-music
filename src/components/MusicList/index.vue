@@ -40,7 +40,7 @@
           :rank="rank"
           :name="song.name"
           :desc="getSongDescText(song)"
-          @click="onSongSelect(musicList, index)"
+          @click.native="onSongSelect(musicList, index)"
         >
         </MusicListItem>
       </ul>
@@ -118,11 +118,8 @@ export default {
     },
 
     // 播放选择歌曲
-    onSongSelect(musicList, index) {
-      this.initPlayer({
-        musicList,
-        index
-      });
+    onSongSelect(songs, index) {
+      this.initPlayer({ songs, index });
     },
 
     // 拼接音乐介绍文本

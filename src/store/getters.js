@@ -12,7 +12,7 @@ export const playMode = (state) => { return state.playMode }
 
 // 正在播放的歌曲
 export const playSong = (state) => {
-    return state.playlist[state.playIndex] || {};
+    return state.playList[state.playIndex] || {};
 }
 
 export const musicList = (state) => { return state.musicList }

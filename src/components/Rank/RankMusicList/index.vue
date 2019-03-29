@@ -12,7 +12,7 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 
-import MusicList from "components/common/MusicList";
+import MusicList from "components/MusicList";
 
 import { ERR_OK } from "api/config";
 import { createSong } from "common/js/song";
