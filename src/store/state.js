@@ -13,7 +13,7 @@ const state = {
     // 播放历史
     playHistory: [],
     // 音乐播放模式
-    palyMode: PLAY_MODE.sequence,
+    playMode: PLAY_MODE.sequence,
 
     // 轮播图图片加载状态
     sliceImgLoaded: false,

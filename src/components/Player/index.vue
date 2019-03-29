@@ -339,7 +339,7 @@ export default {
     },
 
     getRandomIndex() {
-      let length = this.musicPlaylist.length;
+      let length = this.playList.length;
       let index = Math.ceil(Math.random() * length);
       if (this.historyIndex.indexOf(index) === -1) {
         return index;

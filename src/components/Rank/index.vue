@@ -10,6 +10,7 @@
     >
       <ul>
         <RankItem
+          class="rank_toplist_item"
           v-for="item in topList"
           :key="item.name"
           :picUrl="item.picUrl"
@@ -86,5 +87,11 @@ export default {
 <style lang="scss" scoped>
 .loading {
   margin-top: 100px;
+}
+
+.rank_toplist_item {
+  &:last-of-type {
+    padding-bottom: 80px;
+  }
 }
 </style>
