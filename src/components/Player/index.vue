@@ -335,7 +335,7 @@ export default {
     },
 
     onMiniPlayerTouch() {
-      this.setplayFull(true);
+      this.setPlayFull(true);
     },
 
     getRandomIndex() {
