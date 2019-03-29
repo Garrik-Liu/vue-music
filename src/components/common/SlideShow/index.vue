@@ -67,7 +67,7 @@ export default {
 
   components: {
     SlideSlice,
-    SliderButtonGroup
+    SlideButtonGroup
   }
 };
 </script>

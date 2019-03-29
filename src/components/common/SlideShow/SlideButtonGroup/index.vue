@@ -4,23 +4,13 @@
       class="button button--prev"
       @click="$emit('changeSlice', -1)"
     >
-      <svg
-        class="icon"
-        aria-hidden="true"
-      >
-        <use xlink:href="#icon-arrow"></use>
-      </svg>
+      <i>&#60;</i>
     </div>
     <div
       class="button button--next"
       @click="$emit('changeSlice', 1)"
     >
-      <svg
-        class="icon"
-        aria-hidden="true"
-      >
-        <use xlink:href="#icon-arrow"></use>
-      </svg>
+      <i>&#62;</i>
     </div>
   </div>
 </template>
@@ -55,14 +45,6 @@ export default {
       background-color: #000;
       opacity: 0.5;
     }
-  }
-
-  .button--prev > .icon {
-    transform: rotate(90deg);
-  }
-
-  .button--next > .icon {
-    transform: rotate(-90deg);
   }
 }
 </style>

@@ -4,6 +4,7 @@ import Rank from 'components/Rank';
 import Search from 'components/Search';
 import RankMusicList from 'components/Rank/RankMusicList';
 import SingerMusicList from 'components/Singer/SingerMusicList';
+import RecommendMusicList from 'components/Recommend/RecommendMusicList';
 
 export default [{
         path: '/',
@@ -13,6 +14,9 @@ export default [{
     {
         path: '/recommend',
         component: Recommend,
+        children: [
+            { path: ':id', component: RecommendMusicList }
+        ]
 
     },
     // 歌手页面

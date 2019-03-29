@@ -33,6 +33,10 @@ const mutations = {
         state.musicListTitle = musicListTitle;
     },
 
+    [types.SET_SLICE_IMG_LOADED](state, sliceImgLoaded) {
+        state.sliceImgLoaded = sliceImgLoaded;
+    },
+
     [types.SET_SEARCH_HISTORY](state, searchHistory) {
         state.searchHistory = searchHistory;
     }

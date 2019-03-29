@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "better-scroll": "^1.15.1",
     "jsonp": "^0.2.1",
     "vue": "^2.6.6",

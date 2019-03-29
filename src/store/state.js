@@ -15,6 +15,9 @@ const state = {
     // 音乐播放模式
     palyMode: PLAY_MODE.sequence,
 
+    // 轮播图图片加载状态
+    sliceImgLoaded: false,
+
     //  ---- MusicList ----
     // 音乐列表 ID
     musicListId: '',

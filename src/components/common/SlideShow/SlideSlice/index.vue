@@ -9,7 +9,7 @@
         class="img"
         :src="data.picUrl"
         ref="sliceImg"
-        @load="onImgLoaded"
+        @load="imgLoaded(true)"
       >
     </a>
   </div>
@@ -35,7 +35,7 @@ export default {
     },
 
     ...mapMutations({
-      onImgLoaded: "ON_IMG_LOADED"
+      imgLoaded: "SET_SLICE_IMG_LOADED"
     })
   }
 };

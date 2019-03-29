@@ -4,6 +4,7 @@
       :data="singerList"
       @select="onSingerSelect"
     ></SingerList>
+
     <keep-alive>
       <router-view>
       </router-view>

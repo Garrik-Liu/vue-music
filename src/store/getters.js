@@ -25,6 +25,9 @@ export const musicListInfo = (state) => {
     }
 }
 
+export const sliceImgLoaded = (state) => { return state.sliceImgLoaded }
+
+
 export const searchHistory = (state) => {
     return state.searchHistory
 }
