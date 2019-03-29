@@ -30,7 +30,7 @@ export default {
     ...mapGetters(["musicListInfo"])
   },
 
-  created() {
+  activated() {
     this.title = this.musicListInfo.title;
     this.bgImgUrl = this.musicListInfo.bgImg;
     this._getRankData(this.musicListInfo.id);
