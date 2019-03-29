@@ -4,7 +4,7 @@
     <div class="music-list_header">
       <div
         class="music-list_header_bg"
-        :style="topBarBgStyle"
+        :style="headerOpacityStyle"
       ></div>
       <!-- 返回按钮 -->
       <div
@@ -28,6 +28,9 @@
     <ScrollView
       class="music-list_scroll"
       :data="musicList"
+      :probeType="probeType"
+      @scroll="onMusicListScroll"
+      ref="musicList"
     >
       <ul class="music-list_list">
         <MusicListItem
@@ -51,14 +54,19 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+
 import ScrollView from "components/base/ScrollView";
 import Loading from "components/common/Loading";
 import MusicListItem from "./MusicListItem";
 
+import { calScrollToTopPercent } from "common/js/utils";
+
 export default {
   data() {
     return {
-      loading: true
+      loading: true,
+      probeType: 3,
+      headerOpacity: 0
     };
   },
 
@@ -80,6 +88,15 @@ export default {
     }
   },
 
+  created() {
+    // 歌单组件距离顶部距离
+    this.musicListTop = undefined;
+  },
+
+  updated() {
+    this.musicListTop = this.$refs.musicList.$el.offsetTop;
+  },
+
   computed: {
     // 页面背景图
     bgImgStyle() {
@@ -87,9 +104,8 @@ export default {
     },
 
     // 顶部 Header 透明度
-    topBarBgStyle() {
-      // return `opacity: ${this.topOpacity}`;
-      return `opacity: 1`;
+    headerOpacityStyle() {
+      return `opacity: ${this.headerOpacity}`;
     },
 
     ...mapGetters(["musicList"])
@@ -112,6 +128,11 @@ export default {
     // 拼接音乐介绍文本
     getSongDescText({ singer, album }) {
       return `${singer}·${album}`;
+    },
+
+    // 当歌曲列表 Scroll 滚动, 计算 Header 透明度
+    onMusicListScroll(pos) {
+      this.headerOpacity = calScrollToTopPercent(pos, this.musicListTop);
     },
 
     ...mapActions(["initPlayer"])

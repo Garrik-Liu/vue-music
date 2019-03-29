@@ -66,7 +66,6 @@ export default {
     },
 
     onRankItemClick(item) {
-      console.log(item);
       this.setMusicListInfo({
         id: item.id,
         title: item.topTitle,
