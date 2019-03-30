@@ -13,7 +13,7 @@
 
 
 <script>
-import MusicListIcon from "../MusicListIcon";
+import MusicListIcon from "../SongListIcon";
 
 export default {
   props: {

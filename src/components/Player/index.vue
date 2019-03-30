@@ -165,7 +165,12 @@
         <Playlist
           :show-playlist="showPlaylist"
           @close-playlist="showPlaylist = false"
+          @add="onAddSongOpen"
         ></Playlist>
+        <AddSong
+          v-show="showAddSong"
+          @close="onAddSongClose"
+        ></AddSong>
       </div>
     </transition>
     <audio
@@ -182,6 +187,7 @@ import { mapGetters, mapMutations } from "vuex";
 
 import ProgressBar from "./PlayerProgressBar";
 import Playlist from "./Playlist";
+import AddSong from "components/AddSong";
 import ScrollView from "components/base/ScrollView";
 
 import { getSongLyric } from "api/song";
@@ -198,7 +204,8 @@ export default {
       lyrics: [],
       lyricIndex: 0,
       toggleMiddle: false,
-      showPlaylist: false
+      showPlaylist: false,
+      showAddSong: false
     };
   },
 
@@ -331,6 +338,14 @@ export default {
       return result;
     },
 
+    onAddSongOpen() {
+      this.showAddSong = true;
+    },
+
+    onAddSongClose() {
+      this.showAddSong = false;
+    },
+
     onPlayClick() {
       this.setPlaying(!this.playing);
     },
@@ -443,7 +458,8 @@ export default {
   components: {
     ProgressBar,
     ScrollView,
-    Playlist
+    Playlist,
+    AddSong
   }
 };
 </script>

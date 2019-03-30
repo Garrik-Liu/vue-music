@@ -19,12 +19,14 @@
         </div>
       </li>
     </ul>
-    <Loading v-show="!result.length"></Loading>
-    <div
-      v-show="!result.length"
-      class="no-result-wrapper"
-    >
-      <p>抱歉，暂无搜索结果</p>
+    <div class="result-wrapper">
+      <Loading v-show="!result.length"></Loading>
+      <div
+        class="no-result"
+        v-show="!result.length"
+      >
+        <p>抱歉，暂无搜索结果</p>
+      </div>
     </div>
   </ScrollView>
 </template>
@@ -90,14 +92,18 @@ export default {
     }
   }
 
-  .no-result-wrapper {
+  .result-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: absolute;
-    width: 100%;
-    top: 20%;
-    transform: translateY(-50%);
+    margin-top: 100px;
+
+    .no-result {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
   }
 }
 </style>

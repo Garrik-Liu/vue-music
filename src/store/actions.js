@@ -2,7 +2,6 @@ import * as types from './mutation-type'
 
 // 启动播放器
 export const initPlayer = function({ commit }, { songs, index }) {
-    console.log(songs, index)
     commit(types.SET_PLAYLIST, songs);
     commit(types.SET_PLAY_INDEX, index);
     commit(types.SET_PLAY_FULL, true);

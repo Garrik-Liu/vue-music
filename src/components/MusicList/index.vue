@@ -32,18 +32,11 @@
       @scroll="onMusicListScroll"
       ref="musicList"
     >
-      <ul class="music-list_list">
-        <MusicListItem
-          v-for="(song, index) in musicList"
-          :key="song.id"
-          :index="index"
-          :rank="rank"
-          :name="song.name"
-          :desc="getSongDescText(song)"
-          @click.native="onSongSelect(musicList, index)"
-        >
-        </MusicListItem>
-      </ul>
+      <SongList
+        @select="onSongSelect"
+        :musicList="musicList"
+        :rank="rank"
+      ></SongList>
       <Loading
         v-show="loading"
         class="loading"
@@ -57,7 +50,7 @@ import { mapGetters, mapActions } from "vuex";
 
 import ScrollView from "components/base/ScrollView";
 import Loading from "components/common/Loading";
-import MusicListItem from "./MusicListItem";
+import SongList from "components/common/SongList";
 
 import { calScrollToTopPercent } from "common/js/utils";
 
@@ -122,11 +115,6 @@ export default {
       this.initPlayer({ songs, index });
     },
 
-    // 拼接音乐介绍文本
-    getSongDescText({ singer, album }) {
-      return `${singer}·${album}`;
-    },
-
     // 当歌曲列表 Scroll 滚动, 计算 Header 透明度
     onMusicListScroll(pos) {
       this.headerOpacity = calScrollToTopPercent(pos, this.musicListTop);
@@ -137,8 +125,8 @@ export default {
 
   components: {
     ScrollView,
-    MusicListItem,
-    Loading
+    Loading,
+    SongList
   }
 };
 </script>
@@ -212,11 +200,6 @@ export default {
 
 .music-list_scroll {
   overflow: visible;
-}
-
-.music-list_list {
-  padding-top: 10px;
-  background-color: $color-background;
 }
 
 .loading {

@@ -51,7 +51,10 @@
           </ul>
         </ScrollView>
         <div class="list-operate">
-          <div class="add">
+          <div
+            class="add"
+            @click="onAddClick"
+          >
             <i class="icon-add"></i>
             <span class="text">添加歌曲到队列</span>
           </div>
@@ -148,6 +151,10 @@ export default {
       playlist.splice(index, 1);
 
       this.setplayList(playlist);
+    },
+
+    onAddClick() {
+      this.$emit("add");
     },
 
     ...mapMutations({

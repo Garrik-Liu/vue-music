@@ -58,7 +58,6 @@
       ref="searchResult"
     >
       <Suggest
-        ref="suggest"
         :result="searchResult"
         @song-select="onSuggestSongSelect"
       ></Suggest>
@@ -66,40 +65,22 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import { getHotKey } from "api/search";
+import { ERR_OK } from "api/config";
+import { SearchMixin } from "common/js/mixin";
 
-import SearchBox from "./SearchBox";
-import SearchList from "./SearchHistory";
-import Suggest from "./SearchSuggest";
 import ScrollView from "components/base/ScrollView";
 import Loading from "components/common/Loading";
 
-import { getSearch, getHotKey } from "api/search";
-import { ERR_OK } from "api/config";
-import { getSongDetail } from "api/song";
-import { createSong } from "common/js/song";
-
 export default {
+  mixins: [SearchMixin],
   data() {
     return {
-      query: "",
-      outerQuery: "",
-      searchResult: [],
       hotKeys: []
     };
   },
 
-  computed: {
-    ...mapGetters(["searchHistory"])
-  },
-
   watch: {
-    query() {
-      if (this.query !== "") {
-        this._getSearch(this.query, 50);
-      }
-    },
-
     hotKeys() {
       setTimeout(() => {
         this.$refs.shortcut.refresh();
@@ -118,69 +99,18 @@ export default {
   },
 
   methods: {
-    onQueryChange(query) {
-      this.query = query;
-    },
-
-    setSearchQuery(query) {
-      this.outerQuery = query;
-    },
-
-    _getSearch(query, length = 20) {
-      getSearch(query, length).then(res => {
-        if (res.status === 200) {
-          setTimeout(() => {
-            this.searchResult = res.data.data;
-          }, 2000);
-        }
-      });
-    },
-
     _getHotKey() {
       getHotKey().then(res => {
         if (res.code === ERR_OK) {
           this.hotKeys = res.data.hotkey.slice(0, 12);
         }
       });
-    },
-
-    onSuggestSongSelect(song) {
-      getSongDetail(song.id).then(res => {
-        let data = res.data.data;
-
-        let song = createSong({
-          songmid: data.id,
-          singer: data.singer,
-          songname: data.name,
-          albumpic: data.pic,
-          interval: data.time,
-          songurl: data.url
-        });
-
-        this.insertSongToList(song);
-      });
-    },
-
-    onHistoryDelete(index) {
-      let searchHistory = this.searchHistory.concat();
-      searchHistory.splice(index, 1);
-
-      this.setSearchHistory(searchHistory);
-    },
-
-    ...mapMutations({
-      setSearchHistory: "SET_SEARCH_HISTORY"
-    }),
-
-    ...mapActions(["insertSongToList"])
+    }
   },
 
   components: {
-    SearchBox,
     ScrollView,
-    Suggest,
-    Loading,
-    SearchList
+    Loading
   }
 };
 </script>
