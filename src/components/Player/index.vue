@@ -183,7 +183,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 
 import ProgressBar from "./PlayerProgressBar";
 import Playlist from "./Playlist";
@@ -268,6 +268,8 @@ export default {
       this.$nextTick(() => {
         this.$refs.audio.play();
       });
+
+      this.insertSongToPlayHistory(this.playSong);
     },
 
     playIndex() {
@@ -452,7 +454,9 @@ export default {
       setPlaying: "SET_PLAYING",
       setPlayIndex: "SET_PLAY_INDEX",
       setMode: "SET_PLAY_MODE"
-    })
+    }),
+
+    ...mapActions(["insertSongToPlayHistory"])
   },
 
   components: {

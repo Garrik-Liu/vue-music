@@ -37,8 +37,8 @@ export default {
     },
 
     // 拼接音乐介绍文本
-    getSongDescText({ singer, album }) {
-      return `${singer}·${album}`;
+    getSongDescText({ singer = "未知", album = "未知" }) {
+      return `${singer} - ${album}`;
     }
   },
 

@@ -36,16 +36,17 @@
           @switch="onSwitchChange"
         ></Switches>
         <div class="list-wrapper">
-          <ScrollView
-            ref="songList"
+          <div
+            class="list-inner"
             v-if="currentSwitchIndex === 0"
-            class="list-scroll"
-            :data="playHistory"
           >
-            <div class="list-inner">
-
-            </div>
-          </ScrollView>
+            <ScrollView :data="playHistory">
+              <SongList
+                @select="onSongSelect"
+                :musicList="playHistory"
+              ></SongList>
+            </ScrollView>
+          </div>
           <div
             class="list-inner"
             v-if="currentSwitchIndex === 1"
@@ -72,9 +73,11 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters, mapActions } from "vuex";
 import { SearchMixin } from "common/js/mixin";
 
 import ScrollView from "components/base/ScrollView";
+import SongList from "components/common/SongList";
 import SearchBox from "components/Search/SearchBox";
 import SearchSuggest from "components/Search/SearchSuggest";
 import Switches from "./AddSongSwitch";
@@ -88,6 +91,10 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters(["playHistory"])
+  },
+
   methods: {
     onCloseClick() {
       this.$emit("close");
@@ -95,14 +102,21 @@ export default {
 
     onSwitchChange(index) {
       this.currentSwitchIndex = index;
-    }
+    },
+
+    onSongSelect(songs, index) {
+      this.insertSongToList(songs[index]);
+    },
+
+    ...mapActions(["insertSongToList"])
   },
 
   components: {
     ScrollView,
     SearchBox,
     SearchSuggest,
-    Switches
+    Switches,
+    SongList
   }
 };
 </script>

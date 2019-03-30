@@ -8,6 +8,21 @@ export const initPlayer = function({ commit }, { songs, index }) {
     commit(types.SET_PLAYING, true);
 }
 
+export const insertSongToPlayHistory = function({ commit, state }, song) {
+    let playHistory = state.playHistory.concat();
+    let filteredPlayHistory = [];
+
+    playHistory.forEach((item) => {
+        if (song.mid !== item.mid) {
+            filteredPlayHistory.push(item);
+        }
+    })
+
+    filteredPlayHistory.unshift(song);
+
+    commit(types.SET_PLAY_HISTORY, filteredPlayHistory);
+}
+
 // 插入歌曲到播放列表
 export const insertSongToList = function({ commit, state }, song) {
     let playlist = state.playList.concat();
