@@ -4,70 +4,86 @@
       class="add-song_root"
       @click.stop
     >
-      <!-- Header -->
-      <div class="add-song_header">
-        <h1 class="add-song_header_title">添加歌曲到列表</h1>
+      <div class="app-song_wrapper">
+        <!-- Header -->
+        <div class="add-song_header">
+          <h1 class="add-song_header_title">添加歌曲到列表</h1>
+          <div
+            class="add-song_header_close"
+            @click="onCloseClick"
+          >
+            <i class="icon-close"></i>
+          </div>
+        </div>
+
+        <!-- 搜索框 -->
+        <div class="add-song_search-box">
+          <SearchBox
+            @query-change="onQueryChange"
+            :outer-query="outerQuery"
+            @clear="outerQuery = ''"
+            placeholder="搜索歌曲"
+          ></SearchBox>
+        </div>
+
         <div
-          class="add-song_header_close"
-          @click="onCloseClick"
+          class="add-song_history"
+          v-show="!query"
         >
-          <i class="icon-close"></i>
+          <!-- 历史列表切换 -->
+          <Switches
+            :data="switchList"
+            :currentIndex="currentSwitchIndex"
+            @switch="onSwitchChange"
+          ></Switches>
+
+          <div class="list-wrapper">
+            <!-- 播放历史 -->
+            <div
+              class="list-inner"
+              v-if="currentSwitchIndex === 0"
+            >
+              <ScrollView
+                :data="playHistory"
+                ref="playHistory"
+              >
+                <SongList
+                  @select="onSongSelect"
+                  :musicList="playHistory"
+                ></SongList>
+              </ScrollView>
+            </div>
+
+            <!-- 搜索历史 -->
+            <div
+              class="list-inner"
+              v-if="currentSwitchIndex === 1"
+            >
+              <ScrollView
+                :data="searchHistory"
+                ref="searchHistory"
+              >
+                <SearchList
+                  :searches="searchHistory"
+                  @select="setSearchQuery"
+                  @delete="onHistoryDelete"
+                ></SearchList>
+              </ScrollView>
+            </div>
+          </div>
+        </div>
+        <div
+          class="add-song_search-suggest"
+          v-show="query"
+        >
+          <Suggest
+            :result="searchResult"
+            @song-select="_onSuggestSongSelect"
+          ></Suggest>
+          <TopTip ref='topTipAddSong'>添加成功</TopTip>
         </div>
       </div>
 
-      <!-- 搜索框 -->
-      <div class="add-song_search-box">
-        <SearchBox
-          @query-change="onQueryChange"
-          :outer-query="outerQuery"
-          @clear="outerQuery = ''"
-          placeholder="搜索歌曲"
-        ></SearchBox>
-      </div>
-
-      <div
-        class="add-song_history"
-        v-show="!query"
-      >
-        <!-- 历史列表切换 -->
-        <Switches
-          :data="switchList"
-          :currentIndex="currentSwitchIndex"
-          @switch="onSwitchChange"
-        ></Switches>
-        <div class="list-wrapper">
-          <div
-            class="list-inner"
-            v-if="currentSwitchIndex === 0"
-          >
-            <ScrollView :data="playHistory">
-              <SongList
-                @select="onSongSelect"
-                :musicList="playHistory"
-              ></SongList>
-            </ScrollView>
-          </div>
-          <div
-            class="list-inner"
-            v-if="currentSwitchIndex === 1"
-          >
-            <SearchList
-              :searches="searchHistory"
-              @select="setSearchQuery"
-              @delete="onHistoryDelete"
-            ></SearchList>
-          </div>
-        </div>
-      </div>
-      <div
-        class="add-song_search-suggest"
-        v-show="query"
-      >
-        <SearchSuggest
-          :result="searchResult"
-          @song-select="onSuggestSongSelect"
-        ></SearchSuggest>
-      </div>
     </div>
   </transition>
 </template>
@@ -77,9 +93,8 @@ import { mapGetters, mapActions } from "vuex";
 import { SearchMixin } from "common/js/mixin";
 
 import ScrollView from "components/base/ScrollView";
+import TopTip from "components/common/TopTip";
 import SongList from "components/common/SongList";
-import SearchBox from "components/Search/SearchBox";
-import SearchSuggest from "components/Search/SearchSuggest";
 import Switches from "./AddSongSwitch";
 
 export default {
@@ -108,15 +123,19 @@ export default {
       this.insertSongToList(songs[index]);
     },
 
+    _onSuggestSongSelect(e) {
+      this.onSuggestSongSelect(e);
+      this.$refs.topTipAddSong.show();
+    },
+
     ...mapActions(["insertSongToList"])
   },
 
   components: {
     ScrollView,
-    SearchBox,
-    SearchSuggest,
     Switches,
-    SongList
+    SongList,
+    TopTip
   }
 };
 </script>
@@ -125,8 +144,8 @@ export default {
 .add-song_root {
   position: fixed;
   top: 0;
-  bottom: 0;
   width: 100%;
+  height: 100%;
   z-index: 200;
   background: $color-background;
 
@@ -138,6 +157,13 @@ export default {
   &.slide-leave-to {
     transform: translate3d(100%, 0, 0);
   }
+}
+
+.app-song_wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .add-song_header {
@@ -169,9 +195,20 @@ export default {
   margin: 20px;
 }
 
-.add-song_history {
-  .list-wrapper {
-    padding: 20px 30px;
+.list-wrapper {
+  position: absolute;
+  top: 160px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 20px 20px;
+
+  .list-inner {
+    height: 100%;
   }
+}
+
+.add-song_search-suggest {
+  height: 100%;
 }
 </style>

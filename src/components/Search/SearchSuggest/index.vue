@@ -58,9 +58,6 @@ export default {
 
 <style lang="scss" scoped>
 .suggest {
-  height: 100%;
-  overflow: hidden;
-
   .suggest-list {
     padding-left: 25px;
     padding-right: 35px;

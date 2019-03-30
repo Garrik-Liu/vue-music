@@ -50,7 +50,6 @@ export default {
 
 <style lang="scss" scoped>
 .music-list_list {
-  padding-top: 10px;
   background-color: $color-background;
 }
 </style>
