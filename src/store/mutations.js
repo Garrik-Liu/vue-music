@@ -39,6 +39,9 @@ const mutations = {
 
     [types.SET_SEARCH_HISTORY](state, searchHistory) {
         state.searchHistory = searchHistory;
+    },
+    [types.SET_LIKED_MUSIC](state, likedMusic) {
+        state.likedMusic = likedMusic;
     }
 }
 

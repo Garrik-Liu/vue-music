@@ -40,6 +40,36 @@ export const insertSongToList = function({ commit, state }, song) {
     commit(types.SET_PLAY_INDEX, filteredPlaylist.length - 1);
 }
 
+// 插入歌曲到喜爱列表
+export const insertSongToLikedList = function({ commit, state }, song) {
+    let likedMusic = state.likedMusic.concat();
+    let filteredLikedMusic = []
+
+    likedMusic.forEach((item) => {
+        if (song.mid !== item.mid) {
+            filteredLikedMusic.push(item);
+        }
+    })
+
+    filteredLikedMusic.unshift(song);
+
+    commit(types.SET_LIKED_MUSIC, filteredLikedMusic);
+}
+
+// 删除歌曲从喜爱列表
+export const deleteSongFromLikedList = function({ commit, state }, song) {
+    let likedMusic = state.likedMusic.concat();
+    let filteredLikedMusic = []
+
+    filteredLikedMusic = likedMusic.filter((item) => {
+        if (song.mid !== item.mid) {
+            return item;
+        }
+    })
+
+    commit(types.SET_LIKED_MUSIC, filteredLikedMusic);
+}
+
 // 设置音乐列表信息
 export const setMusicListInfo = function({ commit }, { id, title, bgImg }) {
     commit(types.SET_MUSICLIST_ID, id);

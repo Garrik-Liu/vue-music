@@ -29,7 +29,10 @@ const state = {
     musicList: [],
 
     // 搜索历史
-    searchHistory: []
+    searchHistory: [],
+
+    // 喜欢的歌曲
+    likedMusic: []
 }
 
 export default state;

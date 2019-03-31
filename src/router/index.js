@@ -2,6 +2,7 @@ import Recommend from 'components/Recommend';
 import Singer from 'components/Singer';
 import Rank from 'components/Rank';
 import Search from 'components/Search';
+import UserCenter from 'components/UserCenter';
 import RankMusicList from 'components/Rank/RankMusicList';
 import SingerMusicList from 'components/Singer/SingerMusicList';
 import RecommendMusicList from 'components/Recommend/RecommendMusicList';
@@ -41,6 +42,11 @@ export default [{
     {
         path: '/search',
         component: Search
+    },
+    // 用户界面
+    {
+        path: '/user',
+        component: UserCenter
     },
     // 全部匹配不到
     {

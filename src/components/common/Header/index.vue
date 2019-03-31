@@ -2,6 +2,13 @@
   <div class="header-root">
     <i class="icon icon-music"></i>
     <h1 class="header-title">{{ title }}</h1>
+    <router-link
+      tag="div"
+      class="link-mine"
+      to="/user"
+    >
+      <i class="icon-mine"></i>
+    </router-link>
   </div>
 </template>
 
@@ -31,6 +38,19 @@ $icon-width: 30px;
   .icon {
     font-size: $font-size-large-x;
     margin-right: 5px;
+  }
+
+  .link-mine {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .icon-mine {
+      display: block;
+      padding: 12px;
+      font-size: 20px;
+      color: $color-theme;
+    }
   }
 }
 

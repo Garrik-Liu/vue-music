@@ -6,6 +6,41 @@ import { getSearch } from "api/search";
 import { getSongDetail } from "api/song";
 import { createSong } from "common/js/song";
 
+export const playerMixin = {
+    data() {
+        return {
+            liked: false
+        }
+    },
+
+    computed: {
+        likedIcon() {
+            return this.liked ? "icon-favorite" : "icon-not-favorite";
+        },
+        ...mapGetters([
+            "likedMusic"
+        ])
+    },
+
+    methods: {
+
+        checkLiked(song) {
+            for (let i = 0; i < this.likedMusic.length; i++) {
+                let item = this.likedMusic[i];
+                if (item.mid === song.mid) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+
+        ...mapActions(["insertSongToLikedList",
+            "deleteSongFromLikedList"
+        ])
+    }
+}
+
 export const SearchMixin = {
     data() {
         return {

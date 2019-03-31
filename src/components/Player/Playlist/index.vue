@@ -38,12 +38,15 @@
                 class="text"
                 :class="getCurrentText(item)"
               >{{ item.name }}</span>
-              <span class="like">
-                <i class="icon-favorite"></i>
+              <span
+                class="like"
+                @click.stop="toggleLikedMusic(item)"
+              >
+                <i :class="getFavoriteIcon(item)"></i>
               </span>
               <span
                 class="delete"
-                @click="onSongDelete(index)"
+                @click.stop="onSongDelete(index)"
               >
                 <i class="icon-delete"></i>
               </span>
@@ -72,10 +75,13 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import { playerMixin } from "common/js/mixin";
 import ScrollView from "components/base/ScrollView";
 import { PLAY_MODE as playModeList } from "common/js/config";
 
 export default {
+  mixins: [playerMixin],
+
   props: {
     showPlaylist: {
       type: Boolean,
@@ -130,6 +136,22 @@ export default {
       }
 
       this.setMode(nextMode);
+    },
+
+    toggleLikedMusic(song) {
+      if (this.checkLiked(song)) {
+        this.deleteSongFromLikedList(song);
+      } else {
+        this.insertSongToLikedList(song);
+      }
+    },
+
+    getFavoriteIcon(song) {
+      if (this.checkLiked(song)) {
+        return "icon-favorite";
+      }
+
+      return "icon-not-favorite";
     },
 
     getCurrentIcon(item) {

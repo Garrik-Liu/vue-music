@@ -95,7 +95,7 @@ import { SearchMixin } from "common/js/mixin";
 import ScrollView from "components/base/ScrollView";
 import TopTip from "components/common/TopTip";
 import SongList from "components/common/SongList";
-import Switches from "./AddSongSwitch";
+import Switches from "components/common/Switches";
 
 export default {
   mixins: [SearchMixin],

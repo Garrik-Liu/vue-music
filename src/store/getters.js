@@ -31,3 +31,7 @@ export const sliceImgLoaded = (state) => { return state.sliceImgLoaded }
 export const searchHistory = (state) => {
     return state.searchHistory
 }
+
+export const likedMusic = (state) => {
+    return state.likedMusic
+}

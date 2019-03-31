@@ -125,8 +125,14 @@
               <i class="icon-next"></i>
             </div>
 
-            <div class="icon i-right">
-              <i class="icon icon-not-favorite"></i>
+            <div
+              class="icon i-right"
+              @click="onLikedClick"
+            >
+              <i
+                class="icon"
+                :class="likedIcon"
+              ></i>
             </div>
           </div>
         </div>
@@ -184,6 +190,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
+import { playerMixin } from "common/js/mixin";
 
 import ProgressBar from "./PlayerProgressBar";
 import Playlist from "./Playlist";
@@ -196,6 +203,8 @@ import { formatLyric } from "common/js/song";
 import { PLAY_MODE as playModeList } from "common/js/config";
 
 export default {
+  mixins: [playerMixin],
+
   data() {
     return {
       currentTime: 0,
@@ -270,6 +279,12 @@ export default {
       });
 
       this.insertSongToPlayHistory(this.playSong);
+
+      this.playerCheckLiked(this.playSong);
+    },
+
+    playFull() {
+      this.playerCheckLiked(this.playSong);
     },
 
     playIndex() {
@@ -326,6 +341,24 @@ export default {
     back() {
       this.setPlayFull(false);
       this.showPlaylist = false;
+    },
+
+    playerCheckLiked(song) {
+      this.liked = false;
+
+      if (this.checkLiked(song)) {
+        this.liked = true;
+      }
+    },
+
+    onLikedClick() {
+      if (this.liked) {
+        this.deleteSongFromLikedList(this.playSong);
+      } else {
+        this.insertSongToLikedList(this.playSong);
+      }
+
+      this.playerCheckLiked(this.playSong);
     },
 
     formatSingers(singers) {
