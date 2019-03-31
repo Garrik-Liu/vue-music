@@ -64,8 +64,10 @@ export default {
 
     // 当 DOM 结构发生变化时, 重新计算 better-scroll
     refresh() {
-      this.scroll && this.scroll.refresh();
-      this.scroll.hasVerticalScroll = true;
+      setTimeout(() => {
+        this.scroll && this.scroll.refresh();
+        this.scroll.hasVerticalScroll = true;
+      }, 40);
     },
 
     // 滚动到指定元素位置
