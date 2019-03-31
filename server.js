@@ -1,7 +1,7 @@
 var express = require('express')
 var axios = require('axios')
 
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 8080
 
 // 创建 express 实例
 var app = express();
