@@ -4,7 +4,7 @@
 
 ##  应用入口
 
-[Vue Music 音乐应用](http://www.garrikliu.com)
+[Vue Music 音乐应用](http://garrikliu.com/#/recommend)
 
 注意: 本项目为移动端应用, 请用手机浏览器打开. 目前只兼容 **火狐浏览器**.  桌面端浏览的话, 请用开发工具将视口调至移动端尺寸.
 
