@@ -6,7 +6,7 @@ export const URL = {
     singerDetail: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_singer_track_cp.fcg',
     rankTopList: 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg',
     rankMusicList: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
-    songLyric: 'https://api.bzqll.com/music/tencent/lrc',
+    songLyric: 'https://api.mlwei.com/music/api/',
     songDetail: ' https://api.bzqll.com/music/tencent/song',
     hotkey: 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg',
     search: 'https://api.bzqll.com/music/tencent/search'

@@ -5,7 +5,9 @@ export function getSongLyric(id) {
     const url = URL.songLyric;
 
     const query = {
-        key: '579621905',
+        type: 'lrc',
+        cache: '1',
+        key: '523077333',
         id: id,
     }
 
